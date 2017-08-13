@@ -3,9 +3,10 @@ div
   .demo(@click="attachRed = !attachRed", :class="divClasses")
   .demo(@click="attachRed = !attachRed", :class="{red: attachRed}")
   .demo(:class="[color, {roundify: !roundify}]", @click="roundify = !roundify")
-  .demo
+  .demo(:style="[myStyle, {height: width+'px'}]")
   hr
   input(v-model="color")
+  input(v-model="width")
   hr
 
 
@@ -17,7 +18,8 @@ div
       return {
         attachRed : false,
         color : 'green',
-        roundify : false
+        roundify : false,
+        width: 100
       }
     },
     computed: {
@@ -25,6 +27,13 @@ div
         return {
           red: this.attachRed,
           blue: !this.attachRed
+        }
+
+      },
+      myStyle() {
+        return {
+          backgroundColor: this.color,
+          width: this.width + "px"
         }
       }
     }
